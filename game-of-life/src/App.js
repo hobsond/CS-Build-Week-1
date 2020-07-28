@@ -2,7 +2,7 @@ import React, { useState, useRef,useCallback } from 'react'
 import produce from 'immer'
 import Canvas from './components/Canvas'
 import ButtonBox from './components/ButtonBox'
-import {changeValue} from './utils/common'
+import {changeValue,setDragItem} from './utils/common'
 export default function App() {
 
 
@@ -98,10 +98,15 @@ export default function App() {
     [],
   )
 
+  const drop = (i,k,value)=>{
+    setDragItem(setGrid,grid,i,k,value,dragItem)
 
-  const [dragItem,setDrag] = useState()
+  }
+
+
+  const [dragItem,setDrag] = useState([[0,0]])
   const dragValues={
-    one:[2,3,4,3]
+    one:[[-1,2],[3,0]]
   }
   return (
     <>
@@ -119,6 +124,7 @@ export default function App() {
         removeClick={removeClick}
         background={'grey'}
         dragItem={dragItem}
+        drop={drop}
         />
 
         <ButtonBox
@@ -132,8 +138,7 @@ export default function App() {
 
       <div id='iconMenu'>
         <div
-        draggable={true}
-        onDragStart={
+        onClick={
           (e)=>{
             setDrag(dragValues.one)
           }

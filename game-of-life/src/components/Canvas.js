@@ -22,17 +22,27 @@ export default function Canavas(props) {
         
           key={`${i}-${k}`}
           
-          onDragEnter={(e)=>{
-            props.addClick(i, k)
+          onPointerOver={(e)=>{
+            if(props.img){
+              props.drop(i,k,1)
+
+            }
           }}
-          onDragLeave={(e)=>{
-            props.removeClick(i,k)
-          }}
-          onDrop={()=>{
-            props.addClick(i,k)
+          onPointerLeave={(e)=>{
+            if(props.img){
+              props.drop(i,k,0)
+            }
           }}
 
-          onClick={()=>props.addClick(i,k)}
+       
+          onClick={()=>{
+            props.img ? 
+            props.drop(i,k):
+
+            !props.grid[i][k] ?
+            props.addClick(i,k):
+            props.removeClick(i,k)
+          }}
             style={{
             width: '20px',
             height: '20px',
