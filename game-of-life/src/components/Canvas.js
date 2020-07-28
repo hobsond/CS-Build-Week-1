@@ -5,6 +5,17 @@ import niceColors from 'nice-color-palettes'
 const colors = new Array(1000).fill().map(() => niceColors[17][Math.floor(Math.random() * 2)])
 
 export default function Canavas(props) {
+  const click = (i,k)=>{
+    const t = [...props.grid]
+    if(t[i][k] === 1){
+      t[i][k] = 0
+    }
+    else{
+      t[i][k] = 1
+    }
+    console.log(k)
+    props.setGrid(t)
+  }
   return ( 
     <>
   <div
@@ -19,7 +30,7 @@ export default function Canavas(props) {
         <div
           key={`${i}-${k}`}
 
-          onClick={()=>props.click(i,k)}
+          onClick={()=>click(i,k)}
           style={{
             width: '40px',
             height: '40px',
@@ -31,9 +42,7 @@ export default function Canavas(props) {
       ))
     )}
   </div>
-<button> Start Running</button>
-<button> Start Running</button>
-<button> Start Running</button>
+
 </>
 
      
