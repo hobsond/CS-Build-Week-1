@@ -9,6 +9,12 @@ export default function ButtonBox(props) {
 
                 {props.start ? "Stop" : "Start"}
             </button>
+
+            <button
+            onClick={props.reset}
+            >
+                Reset
+            </button>
             
         </div>
     )

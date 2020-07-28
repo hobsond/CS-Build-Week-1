@@ -2,7 +2,7 @@ import React, { useState, useRef,useCallback } from 'react'
 import produce from 'immer'
 import Canvas from './components/Canvas'
 import ButtonBox from './components/ButtonBox'
-
+import {changeValue} from './utils/common'
 export default function App() {
 
 
@@ -19,21 +19,20 @@ export default function App() {
     return rows
   }
 
+  const resetGrid =()=>{
+    setGrid(startGrid)
+  }
+
   const [grid,setGrid] = useState(startGrid)
 
   const [start,setStart] = useState(false)
 
   const addClick = (i,k)=>{
-    setGrid(()=>{
-      return produce(grid,gCopy=>{
-        if(grid[i][k] ===1){
-          gCopy[i][k] = 0
-        }
-        else{
-          gCopy[i][k] = 1
-        }
-      })
-    })
+    changeValue(setGrid,grid,i,k,1)
+  }
+
+  const removeClick = (i,k )=>{
+    changeValue(setGrid,grid,i,k,0)
   }
 
   const running = useRef(start)
@@ -98,12 +97,57 @@ export default function App() {
     },
     [],
   )
+
+
+  const [dragItem,setDrag] = useState()
+  const dragValues={
+    one:[2,3,4,3]
+  }
   return (
     <>
 
-    <Canvas grid={grid} rows={rowsNum} setGrid={setGrid} addClick={addClick} />
-    <ButtonBox
-     setStart={setStart} sim={sim} start={start}  startClick={startClick}  />
+    <div id='gameContainer'>
+      {/* div will hold the game,The Main Canvas, And icons */}
+
+      <div id='mainCanvas'>
+        <Canvas 
+        
+        grid={grid} 
+        rows={rowsNum} 
+        setGrid={setGrid} 
+        addClick={addClick} 
+        removeClick={removeClick}
+        background={'grey'}
+        dragItem={dragItem}
+        />
+
+        <ButtonBox
+        setStart={setStart}
+        sim={sim} 
+        start={start} 
+        startClick={startClick}  
+        reset={resetGrid}
+       />
+      </div>
+
+      <div id='iconMenu'>
+        <div
+        draggable={true}
+        onDragStart={
+          (e)=>{
+            setDrag(dragValues.one)
+          }
+        }
+        >
+          boat
+
+        </div>
+
+      </div>
+
+    </div>
+
+
 
     
     </>
