@@ -1,4 +1,5 @@
 import React, { useState, useRef,useCallback } from 'react'
+import produce from 'immer'
 import Canvas from './components/Canvas'
 import ButtonBox from './components/ButtonBox'
 
@@ -6,80 +7,103 @@ export default function App() {
 
 
 
-  const rowsNum = 100
-  const colNum = 100
+  const rowsNum = 25
+  const colNum = 25
 
   const startGrid= ()=>{
     const rows = []
     for(let i =0; i< rowsNum;i++){
       rows.push(Array.from(Array(colNum),()=>0))
-      return rows
+      
     }
+    return rows
   }
 
   const [grid,setGrid] = useState(startGrid)
 
   const [start,setStart] = useState(false)
 
+  const addClick = (i,k)=>{
+    setGrid(()=>{
+      return produce(grid,gCopy=>{
+        if(grid[i][k] ===1){
+          gCopy[i][k] = 0
+        }
+        else{
+          gCopy[i][k] = 1
+        }
+      })
+    })
+  }
+
   const running = useRef(start)
   running.current = start
+
+  const startClick =()=>{
+    setStart(!start)
+    running.current = true
+    sim(grid)
+
+  }
+  const operations = [
+    [0, 1],
+    [0, -1],
+    [1, -1],
+    [-1, 1],
+    [1, 1],
+    [-1, -1],
+    [1, 0],
+    [-1, 0]
+  ];
   
-  const sim =  useCallback(
-    (time) => {
-      if(!running.current){
+  const sim = useCallback(
+    (g) => {
+      //check if currently running
+      if(running.current === false){
         return
+
       }
-      //Iterate through Current grid
-      //check the value of each cell
-      setGrid(()=> {
-        const j = [...grid]
+      else{
 
-      grid.map((rows, i) =>
-      rows.map((col, k) =>{
-        const t = (j[i][k-10] + j[i][k+10]) + (j[i][k-1] + j[i][k+1])
 
-          
-          if(j[i][k] === 1){
-            if (t < 2){
-              j[i][k] = 0
-    
-            }
-            if(t === 2 || 3 ){
-              j[i][k] = 1
-            }
-            if(t >3){
-              j[i][k] = 0
-    
-            }
-
-          }
-          else{
-            if(t > 3){
-              j[i][k] = 1
-              
-            }
-          }
-
-        
-
-        
-      } ))
-    return j
-    })
       
 
-      setTimeout(sim,time * 1000)
+        setGrid(g => {
+          return produce(g, gridCopy => {
+            for (let i = 0; i < rowsNum; i++) {
+              for (let k = 0; k < colNum; k++) {
+                let neighbors = 0;
+                operations.forEach(([x, y]) => {
+                  const newI = i + x;
+                  const newK = k + y;
+                  if (newI >= 0 && newI < rowsNum && newK >= 0 && newK < colNum) {
+                    neighbors += g[newI][newK];
+                  }
+                });
+    
+                if (neighbors < 2 || neighbors > 3) {
+                  gridCopy[i][k] = 0;
+                } else if (g[i][k] === 0 && neighbors === 3) {
+                  gridCopy[i][k] = 1;
+                }
+              }
+            }
+          });
+        });
+    
+    
+    
+  }
+      setTimeout(sim,1000)
     },
     [],
   )
-
-  sim(1)
-
   return (
     <>
 
-    <Canvas grid={grid} setGrid={setGrid} />
-    <ButtonBox setStart={setStart} start={start}  />
+    <Canvas grid={grid} rows={rowsNum} setGrid={setGrid} addClick={addClick} />
+    <ButtonBox
+     setStart={setStart} sim={sim} start={start}  startClick={startClick}  />
 
     
     </>
