@@ -1,34 +1,36 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from 'react'
+import Canvas from './components/Canvas'
 
-import {Canvas,useFrame} from 'react-three-fiber'
-import {softShadows,} from 'drei'
-import {useSpring,a} from 'react-spring/three'
+export default function App() {
 
 
-function App() {
-  return (
-    <div className="App">
-      <h1>The beautiful Game Of Life</h1>
 
-      <Canvas 
-      
-      >
-        <mesh>
-          <boxBufferGeometry attach='geometry' args={[1,1,1]}  />
-          <meshStandardMaterial attach='material'/>
-          
-        </mesh>
-
-      </Canvas>
+  const rowsNum = 100
+  const colNum = 100
   
+  const [grid,setGrid] = useState(()=>{
+    const rows = []
+    for(let i =0; i< rowsNum;i++){
+      rows.push(Array.from(Array(colNum),()=>0))
+      return rows
+    }
+  })
+  const click = (i,k)=>{
+    const t = [...grid]
+    if(t[i][k] === 1){
+      t[i][k] = 0
+    }
+    else{
+      t[i][k] = 1
+    }
+    setGrid(t)
+  }
 
+  return (
+    <>
+    <Canvas grid={grid} click={click} />
 
-
-
-   
-    </div>
-  );
+    
+    </>
+  )
 }
-
-export default App;
