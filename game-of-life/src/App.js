@@ -2,14 +2,33 @@ import React, { useState, useRef,useCallback } from 'react'
 import produce from 'immer'
 import Canvas from './components/Canvas'
 import ButtonBox from './components/ButtonBox'
-import {changeValue,setDragItem} from './utils/common'
+import {changeValue,setDragItem,setMap} from './utils/common'
+import MapBox from './components/MapBox'
+import IconMenu from './components/IconMenu'
+
+
+
+
 export default function App() {
 
 
-
+//variables
   const rowsNum = 25
   const colNum = 25
+  const operations = [
+    [0, 1],
+    [0, -1],
+    [1, -1],
+    [-1, 1],
+    [1, 1],
+    [-1, -1],
+    [1, 0],
+    [-1, 0]
+  ];
 
+
+//functions
+// //Start grid Creates Original Array values
   const startGrid= ()=>{
     const rows = []
     for(let i =0; i< rowsNum;i++){
@@ -23,9 +42,6 @@ export default function App() {
     setGrid(startGrid)
   }
 
-  const [grid,setGrid] = useState(startGrid)
-
-  const [start,setStart] = useState(false)
 
   const addClick = (i,k)=>{
     changeValue(setGrid,grid,i,k,1)
@@ -35,8 +51,7 @@ export default function App() {
     changeValue(setGrid,grid,i,k,0)
   }
 
-  const running = useRef(start)
-  running.current = start
+  
 
   const startClick =()=>{
     setStart(!start)
@@ -44,17 +59,17 @@ export default function App() {
     sim(grid)
 
   }
-  const operations = [
-    [0, 1],
-    [0, -1],
-    [1, -1],
-    [-1, 1],
-    [1, 1],
-    [-1, -1],
-    [1, 0],
-    [-1, 0]
-  ];
   
+
+  const drop = (i,k,value)=>{
+    setDragItem(setGrid,grid,i,k,value,dragItem)
+  }
+
+  const timeChange = (e)=>{
+    const value = e.target.value
+    setTime(value)
+  }
+  // simulation Funciontion
   const sim = useCallback(
     (g) => {
       //check if currently running
@@ -94,29 +109,32 @@ export default function App() {
     
   }
       setTimeout(sim,1000)
-    },
-    [],
-  )
-
-  const drop = (i,k,value)=>{
-    setDragItem(setGrid,grid,i,k,value,dragItem)
-
-  }
+        },[],)
+  
 
 
-  const [dragItem,setDrag] = useState([[0,0]])
-  const dragValues={
-    one:[[-1,2],[3,0]]
-  }
+// states
+const [grid,setGrid] = useState(startGrid)
+const [dragItem,setDrag] = useState([[0,0]])
+const [img,setImg] = useState(false)
+const [start,setStart] = useState(false)
+const [time,setTime] = useState(1)
+
+//ref
+const running = useRef(start)
+running.current = start
+
+
+
+  
   return (
     <>
 
     <div id='gameContainer'>
       {/* div will hold the game,The Main Canvas, And icons */}
 
-      <div id='mainCanvas'>
+    
         <Canvas 
-        
         grid={grid} 
         rows={rowsNum} 
         setGrid={setGrid} 
@@ -125,33 +143,48 @@ export default function App() {
         background={'grey'}
         dragItem={dragItem}
         drop={drop}
+        img={img}
+          setImg={setImg}
         />
 
-        <ButtonBox
+    </div>
+
+    <div id='pannel-topright'>
+      <IconMenu 
+      setDrag={setDrag}
+      setImg = {setImg}
+      />
+
+     
+      {/* map box */}
+      <MapBox
+      resetGrid={resetGrid}
+      setGrid ={setGrid}
+      grid ={grid}
+        
+     />
+    
+      
+
+    </div>
+
+    <div id='pannel-bottomRight'>
+
+      <ButtonBox
         setStart={setStart}
         sim={sim} 
         start={start} 
         startClick={startClick}  
         reset={resetGrid}
-       />
-      </div>
+        timeChange={timeChange}
+        time={time}
+      />
+    
+    </div>    
+    
+        
 
-      <div id='iconMenu'>
-        <div
-        onClick={
-          (e)=>{
-            setDrag(dragValues.one)
-          }
-        }
-        >
-          boat
-
-        </div>
-
-      </div>
-
-    </div>
-
+    
 
 
     

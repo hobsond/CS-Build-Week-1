@@ -22,18 +22,38 @@ export const changeValue = (cb,grid,i,k,value)=>{
 const getDragValue = (arr,I,k)=>{
 
     let x = arr.map(item=>{
-        return [item[0] + I, item[1] + k]
+        const j = item[0] + I
+        const t = item[1] + k
+        return [j,t]
     })
+    // console.log(x)
     return x
-    
 }
+
+
 
 export const setDragItem=(cb,grid,i,k,value,arr)=>{
 
     const values = getDragValue(arr,i,k)
-    values.forEach(x=>{
-        changeValue(cb,grid,x[0],x[1],1)
+
+    cb(()=>{
+        return produce(grid,gCopy=>{
+            values.forEach(x=>{
+                gCopy[x[0]][x[1]] = 1
+            })
+        })
     })
 
 }
 
+export const setMap=(cb,grid,arr)=>{
+    cb(()=>{
+        return produce(grid,gCopy=>{
+            arr.forEach(x=>{
+                gCopy[x[0]][x[1]] = 1
+            })
+
+        })
+    })
+
+}

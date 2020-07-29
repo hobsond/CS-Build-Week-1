@@ -15,6 +15,16 @@ export default function ButtonBox(props) {
             >
                 Reset
             </button>
+            <label>
+            Select Your Speed
+            <input
+            onChange={props.timeChange}
+            value={props.time}
+             type="range" 
+             id="vol" 
+             name="vol" 
+             min="1" max="1000"/>
+             </label>
             
         </div>
     )

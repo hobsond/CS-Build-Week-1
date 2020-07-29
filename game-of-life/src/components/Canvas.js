@@ -24,13 +24,13 @@ export default function Canavas(props) {
           
           onPointerOver={(e)=>{
             if(props.img){
-              props.drop(i,k,1)
+              props.addClick(i,k)
 
             }
           }}
           onPointerLeave={(e)=>{
             if(props.img){
-              props.drop(i,k,0)
+              props.removeClick(i,k)
             }
           }}
 
@@ -40,8 +40,11 @@ export default function Canavas(props) {
             props.drop(i,k):
 
             !props.grid[i][k] ?
-            props.addClick(i,k):
+            props.addClick(i,k)
+            :
             props.removeClick(i,k)
+
+            props.setImg(false)
           }}
             style={{
             width: '20px',
