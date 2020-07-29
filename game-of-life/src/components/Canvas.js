@@ -49,7 +49,7 @@ export default function Canavas(props) {
             style={{
             width: '20px',
             height: '20px',
-            backgroundColor: props.grid[i][k] === 1 ? `${colors[6]}` : props.background,
+            backgroundColor: props.grid[i][k] === 1 ? props.blockColor || `${colors[6]}` : props.background,
             transition:"all .07s ease-in-out",
             border: "solid 1px black"
           }}

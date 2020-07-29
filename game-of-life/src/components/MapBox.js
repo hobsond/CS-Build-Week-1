@@ -27,16 +27,14 @@ export default function MapBox(props) {
          
         {
             Object.entries(maps).map((k)=>{
+                if(k[0]=='rando'){
+                    console.log(k)
+                }
+
+                
                 return mapItem(k[0],k[1],k[0])
             })
         }
-
-        
-
-
-            
-
-            
         </div>
     )
 }
