@@ -37,7 +37,8 @@ export const MenuDisplay = styled.div`
     color:white;
     box-shadow: 0 4px 6px black;
     @media(max-width:756px){
-      width:80%;
+      width:100%;
+      height:fit-content;
       margin:0 auto;
 
   }
