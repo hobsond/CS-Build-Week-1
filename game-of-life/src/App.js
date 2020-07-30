@@ -11,7 +11,7 @@ import IconMenu from './components/IconMenu'
 import Settings from './components/Settings'
 import Timer from './components/Timer'
 import About from './components/About'
-import {Display,GameBox,MenuDisplay} from './styledComponents/style'
+import {Display,GameBox,MenuDisplay,Button} from './styledComponents/style'
 
 
 export default function App() {
@@ -207,7 +207,7 @@ running.current = start
 
         <MenuDisplay>
           {
-            buttonCreate(setTheShowMenu,!showMenu ? 'Show Menu' : "Show Controls",'menuButton')
+            buttonCreate(setTheShowMenu,!showMenu ? 'Config' : "Home","menuButton")
           }
 
           {
