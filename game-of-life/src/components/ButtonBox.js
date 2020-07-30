@@ -5,7 +5,7 @@ import {GameCont} from '../utils/GameContext'
 
 export default function ButtonBox(props) {
 
-const {startClick,start,randomMap,singleSim,resetGrid} = useContext(GameCont)
+const {startClick,start,randomMap,singleSim,resetGrid,running} = useContext(GameCont)
 
     const [simCount,setSimCount] = useState(10)
 
@@ -16,7 +16,7 @@ const {startClick,start,randomMap,singleSim,resetGrid} = useContext(GameCont)
                 
 
                 {
-                    buttonCreate(startClick,start ? 'Stop':"Start",'startButton',<button/>,{background:start? "red" : "#48E330"})
+                    buttonCreate(startClick,running.current ? 'Stop':"Start",'startButton',null,{background:running.current? "red" : "#48E330"})
                 }
 
                 {

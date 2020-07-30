@@ -224,6 +224,7 @@ running.current = start
               dragItem,drop,img,setImg,setBlock,
               setDrag,resetGrid,setStart,sim,singleSim,
               multiSim,startClick,randomMap,setBackground,
+              running
             }
           }>
         <GameBox id='gameContainer'>
@@ -249,18 +250,7 @@ running.current = start
             {/* map box */}
             <MapBox/>
 
-            <ButtonBox
-              setStart={setStart}
-              sim={sim} 
-              start={start} 
-              startClick={startClick}  
-              reset={resetGrid}
-              randomMap={randomMap}
-              singleSim={singleSim}
-              // setPreviousGrid={setPreviousGrid}
-              multiSim={multiSim}
-
-            />
+            <ButtonBox/>
 
             {start ?
             <Timer/>:
@@ -268,10 +258,7 @@ running.current = start
           }
         <div id ='settings'>
 
-        <Settings
-          setBackground={setBackground}
-          setBlock={setBlock}
-        />
+          <Settings/>
 
 
         </div> 

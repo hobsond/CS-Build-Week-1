@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import {MenuHeaders,IconBox} from '../styledComponents/style'
+import {GameCont} from '../utils/GameContext'
 
 export default function Settings(props) {
+    const {setBlock,setBackground} = useContext(GameCont)
 
     const colorChange=(color,name)=>{
         return(
@@ -10,7 +12,7 @@ export default function Settings(props) {
             className='colorChoice'
             style={{background:color}}
             onClick={()=>{
-                props.setBlock(color)
+                setBlock(color)
             }}
             >
                 {name}
@@ -27,7 +29,7 @@ export default function Settings(props) {
             key={name}
             onClick={
                 ()=>{
-                    props.setBackground(color)
+                    setBackground(color)
                 }
             }
             
