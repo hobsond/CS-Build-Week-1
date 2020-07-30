@@ -1,17 +1,19 @@
 import React,{useState,useContext} from 'react'
-import {IconBox,SimBox} from '../styledComponents/style'
+import {IconBox,SimBox,MenuHeaders} from '../styledComponents/style'
 import {buttonCreate} from '../utils/common'
 import {GameCont} from '../utils/GameContext'
 
 export default function ButtonBox(props) {
 
-const {startClick,start,randomMap,singleSim,resetGrid,running} = useContext(GameCont)
+const {startClick,start,randomMap,singleSim,resetGrid,running,multiSim} = useContext(GameCont)
 
     const [simCount,setSimCount] = useState(10)
 
     
     return (
-        <div>
+        <div
+        style={{border:"1px solid black",width:"90%",margin:"0 auto"}}
+        >
             <IconBox>
                 
 
@@ -47,12 +49,11 @@ const {startClick,start,randomMap,singleSim,resetGrid,running} = useContext(Game
             </label>
 
             <button
-            onClick={()=>props.multiSim(simCount)}
+            onClick={()=>multiSim(simCount)}
             >
                 Multi Sim
 
             </button>
-
             </SimBox>
 
         </div>

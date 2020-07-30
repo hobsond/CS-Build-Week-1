@@ -10,11 +10,12 @@ import IconMenu from './components/IconMenu'
 import Settings from './components/Settings'
 import Timer from './components/Timer'
 import About from './components/About'
-import {Display,GameBox,MenuDisplay,Button} from './styledComponents/style'
 
 // Utills
 import {changeValue,setDragItem,setMap,buttonCreate} from './utils/common'
 import {GameCont} from './utils/GameContext'
+import {Display,GameBox,MenuDisplay,Title} from './styledComponents/style'
+
 
 
 export default function App() {
@@ -78,7 +79,10 @@ export default function App() {
     if(start){
       return
     }
-    setMap(setGrid,grid,getRandom())
+    for(let i = 0; i<20;i++){
+      setMap(setGrid,grid,getRandom())
+
+    }
   }
 
   const addClick = (i,k)=>{
@@ -214,7 +218,7 @@ running.current = start
   return (
     <div>
      
-      <h1> Conways Game of Life</h1>
+      <Title> Conways Game of Life</Title>
 
         <Display>
           <GameCont.Provider value={
@@ -229,7 +233,12 @@ running.current = start
           }>
         <GameBox id='gameContainer'>
               {/* div will hold the game,The Main Canvas, And icons */}
+            <div
+            >
+            
             <Canvas />
+            </div>
+              
           
         </GameBox>
 
@@ -252,10 +261,7 @@ running.current = start
 
             <ButtonBox/>
 
-            {start ?
-            <Timer/>:
-            null
-          }
+            
         <div id ='settings'>
 
           <Settings/>

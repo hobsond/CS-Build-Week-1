@@ -1,18 +1,23 @@
 import styled from 'styled-components'
 
+const fonts = {
+  title:"font-family: 'Anton', sans-serif;",
+  items:"font-family: 'Fjalla One', sans-serif;",
+  buttons:"font-family: 'EB Garamond', serif;"
+}
 export const Display = styled.div`
   display:flex;
   /* justify-content:center; */
   margin:0 auto;
-  height:100%;
+  height:100vh;
   @media(max-width:756px){
-    flex-direction:column-reverse;
+    flex-direction:column;
     justify-content:center;
   }
 
 `
 export const GameBox = styled.div`
-  margin-left:15%;
+  margin-left:22%;
   margin-right:2%;
   min-height:80vh;
 
@@ -26,17 +31,24 @@ export const GameBox = styled.div`
 export const StyledCan= styled.div `
   margin-top:5%;
   max-width:45%;
-  width:45%;
+  box-shadow:60px 7px 150px darkgray;
   `
 export const MenuDisplay = styled.div`
 
     width:30%;
     background:#6b7b8c;
+    padding:1%;
     height:80vh;
     color:white;
     height:fit-content;
+    border-radius:7px;
+    letter-spacing:.2rem;
 
-    box-shadow: 0 4px 6px black;
+    p,ul{
+      font-family: 'Mulish', sans-serif;
+    }
+
+    box-shadow: 0 4px 12px black;
     @media(max-width:756px){
       width:100%;
       margin:0 auto;
@@ -53,15 +65,17 @@ export const IconBox = styled.div`
   
   .button{
     margin:1% auto;
+    text-align:center;
     width:30%;
-    padding:2%;
+    padding:1.4%;
     background: #1e3d59;
     box-shadow: 2px 4px 6px black;
     transition:all .07s ease-in-out;
     color:white;
     border-radius:3%;
+    ${fonts.buttons};
     &: hover{
-      background:#f5f0e1;
+      background:darkgray;
     }
 
   }
@@ -76,7 +90,7 @@ export const IconBox = styled.div`
   }
   .colorChoice{
     box-shadow: 0 4px 8px darkgray;
-    text-shadow:-2px 0 3px black;
+    text-shadow:-2px 0 1px black;
     border-radius:23%;
 
     width:20%;
@@ -93,6 +107,7 @@ export const SimBox= styled.div`
   justify-content:space-around;
   margin:0 auto;
   margin-top:5%;
+  ${fonts.buttons}
 
 
 `
@@ -100,8 +115,14 @@ export const SimBox= styled.div`
 export const MenuHeaders= styled.h3`
   text-align:center;
   background:#1e3d59;
-  margin:0 auto;
+  color:whitesmoke;
+  text-shadow:0 .3% black;
+  word-spacing:2%;
+  letter-spacing:0.1rem;
+  margin:2% auto;
   margin-top:1%;
+  font-size:90%;
+  ${fonts.items}
 `
 export const GenDisplay = styled.div`
   background:white;
@@ -119,9 +140,16 @@ color:whitesmoke;
 text-align:center;
 text-shadow:-2px 0 3px black;
 background:black;
+${fonts.buttons};
 
 `
 
 export const Button = styled.div`
+
+`
+
+export const Title = styled.h1`
+ ${fonts.title};
+ text-align:center;
 
 `
