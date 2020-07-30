@@ -14,7 +14,7 @@ export default function Canavas(props) {
   <div
     style={{
       display: "grid",
-      gridTemplateColumns:`repeat(${props.rows},20px)`
+      gridTemplateColumns:`repeat(${props.rows },20px)`
     }}
   >
     {props.grid.map((rows, i) =>

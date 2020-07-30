@@ -1,39 +1,33 @@
 import React,{useState} from 'react'
-import {IconBox} from '../styledComponents/style'
+import {IconBox,SimBox} from '../styledComponents/style'
+import {buttonCreate} from '../utils/common'
 export default function ButtonBox(props) {
 
     const [simCount,setSimCount] = useState(10)
 
-    const buttonCreate = (cb,inner,id=null,style)=>{
-        return(
-        <button
-        id={id}
-        style={style}
-        className='button'
-        onClick={()=>cb()}
-        >
-        {inner}
-        </button>)
-    }
+    
     return (
         <div>
             <IconBox>
                 
 
                 {
-                    buttonCreate(props.startClick,props.start ? 'Stop':"Start",'startButton',
-                    {background:props.start? "red" : "green"})
+                    buttonCreate(props.startClick,props.start ? 'Stop':"Start",'startButton',<button/>,{background:props.start? "red" : "#48E330"})
                 }
 
                 {
-                    buttonCreate(props.randomMap,'Random')
+                    buttonCreate(props.randomMap,'Random',)
                 }
 
                 {
-                    buttonCreate(props.singleSim,'Next')
+                    buttonCreate(props.singleSim,'Next',<button/>)
+                }
+                {
+                buttonCreate(props.reset,'Reset','reset')
                 }
             </IconBox>
-            
+            <SimBox >
+
             <label>
                 Select a Simulation
                 <select onChange={(e)=>{
@@ -55,9 +49,8 @@ export default function ButtonBox(props) {
 
             </button>
 
-            {
-                buttonCreate(props.reset,'Reset')
-            }
+            </SimBox>
+
         </div>
     )
 }

@@ -1,10 +1,13 @@
 import React from 'react'
-
+import {MenuHeaders,IconBox} from '../styledComponents/style'
 
 export default function Settings(props) {
-    const ColorChange=(color,name)=>{
+
+    const colorChange=(color,name)=>{
         return(
             <div
+            key={name}
+            className='colorChoice'
             style={{background:color}}
             onClick={()=>{
                 props.setBlock(color)
@@ -15,15 +18,19 @@ export default function Settings(props) {
         )
     }
 
+
     const backgroundChange = (color,name)=>{
         return (
-            <div
+            <div 
+            className='colorChoice'
+
+            key={name}
             onClick={
                 ()=>{
                     props.setBackground(color)
                 }
             }
-            className='colorSplat'
+            
             style={{background:color}}
             >
                 {name}
@@ -33,40 +40,59 @@ export default function Settings(props) {
 
     }
 
+    const blockColors = {
+        Red:"#d72631",
+        Mag:"#cf1578",
+        Golden:"#e8d21d"
+    }
+
+    const backgroundColor={
+        jade:"#077b8a",
+        home:null,
+        none:'black'
+
+    }
+
 
     return (
         <div>
-            {
-                ColorChange("#4ca3dd",'blue')
-            }
-            {
-                ColorChange("#e6e6fa","Lavender")
-            }
-            {
-                ColorChange("#ffd700","Gold")
-            }
-            {
-                ColorChange("#8b6508","dark olives")
-            }
-            {
-                ColorChange(null,'Random')
-            }
 
         <div>
+            <MenuHeaders>Block Color</MenuHeaders>
+            <IconBox>
+                {
+                Object.entries(blockColors).map(x=>{
+                return colorChange(x[1],x[0])
+                                    
+                })
+                }
 
+            </IconBox>
 
+        </div>   
 
-        </div>
+        <div>
+            <MenuHeaders> background Color</MenuHeaders>
+            <IconBox>
 
             {
-                backgroundChange("#6b6b6b","gray")
-            }
-            {
-                backgroundChange("#ff6eb4","pink")
-            }
-            
-        </div>
+                Object.entries(backgroundColor).map(x=>{
+                    return backgroundChange(x[1],x[0])
+                })
 
+            }
+
+
+            </IconBox>
         
+        
+        </div >     
+        
+
+            
+                
+                
+                
+        </div>
     )
 }

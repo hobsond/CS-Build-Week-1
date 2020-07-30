@@ -1,7 +1,7 @@
 import React from 'react'
 import maps from '../maps/maps'
 import {setMap} from '../utils/common'
-import {IconBox} from '../styledComponents/style'
+import {MenuHeaders,IconBox,Item} from '../styledComponents/style'
 
 
 
@@ -9,7 +9,7 @@ export default function MapBox(props) {
 
     const mapItem = (id,map,name)=>{
         return(
-            <div 
+            <Item 
             key={id}
             className='map-item'
             id={id}
@@ -21,13 +21,13 @@ export default function MapBox(props) {
                 {name}
 
 
-            </div>
+            </Item>
         )
     }
     return (
         <div>
 
-            <h3>Maps</h3>
+            <MenuHeaders>Maps</MenuHeaders>
 
             <IconBox>
          

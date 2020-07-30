@@ -1,4 +1,6 @@
+import React from 'react'
 import produce from 'immer'
+import * as Style from '../styledComponents/style'
 //change value 
 //takes in a cb which is going to set the state 
 // take in the grid,placement, and value
@@ -28,6 +30,19 @@ const getDragValue = (arr,I,k)=>{
     })
     // console.log(x)
     return x
+}
+
+export const buttonCreate = (cb,inner,id=null,t=<button/>,style)=>{
+
+    return(
+    <t
+    id={id}
+    style={style}
+    className='button'
+    onClick={()=>cb()}
+    >
+    {inner}
+    </t>)
 }
 
 

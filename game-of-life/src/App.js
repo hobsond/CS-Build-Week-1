@@ -1,15 +1,16 @@
-import React, { useState, useRef,useCallback, useEffect } from 'react'
-
-
+import React, { useState, useRef,useCallback, } from 'react'
+import './App.css'
 import produce from 'immer'
+
+
 import Canvas from './components/Canvas'
 import ButtonBox from './components/ButtonBox'
-import {changeValue,setDragItem,setMap} from './utils/common'
+import {changeValue,setDragItem,setMap,buttonCreate} from './utils/common'
 import MapBox from './components/MapBox'
 import IconMenu from './components/IconMenu'
 import Settings from './components/Settings'
 import Timer from './components/Timer'
-
+import About from './components/About'
 import {Display,GameBox,MenuDisplay} from './styledComponents/style'
 
 
@@ -31,7 +32,6 @@ export default function App() {
     [-1, 0]
   ];
 
-
 //functions
 // //Start grid Creates Original Array values
   const startGrid= ()=>{
@@ -44,7 +44,7 @@ export default function App() {
   }
 
   const resetGrid =()=>{
-    setGen(0)
+    setStart(false)
     setGrid(()=>{
       return produce(grid,gCopy=>{
        gCopy = startGrid()
@@ -55,9 +55,9 @@ export default function App() {
   const getRandom =()=>{
     //i want to loop through each row
     let x = []
-    for(let i = 0 ; i<50;i++){
-        const j = Math.floor(Math.random() * Math.floor(25) )
-        const i = Math.floor(Math.random() * Math.floor(25) )
+    for(let i = 0 ; i<rowsNum;i++){
+        const j = Math.floor(Math.random() * Math.floor(rowsNum) )
+        const i = Math.floor(Math.random() * Math.floor(rowsNum) )
         x.push([i,j])
     }
    
@@ -95,6 +95,7 @@ export default function App() {
   const drop = (i,k,value)=>{
     setDragItem(setGrid,grid,i,k,value,dragItem)
   }
+  const setTheShowMenu = ()=>setShowMenu(!showMenu)
 
 
 
@@ -108,7 +109,7 @@ const [start,setStart] = useState(false)
 const [background,setBackground] = useState('grey')
 const [blockColor,setBlock]= useState()
 const [gen,setGen] = useState(0)
-
+const [showMenu,setShowMenu] = useState(false)
 
 // simulation Funciontions
 
@@ -169,16 +170,15 @@ const multiSim= (x)=>{
 }
 
 
-
 //ref
 const running = useRef(start)
 running.current = start
 
-
-
+// Three js
   
   return (
     <div>
+     
       <h1> Conways Game of Life</h1>
 
         <Display>
@@ -186,7 +186,7 @@ running.current = start
         <GameBox id='gameContainer'>
           {/* div will hold the game,The Main Canvas, And icons */}
             
-
+         
             <Canvas 
             grid={grid} 
             rows={rowsNum} 
@@ -206,57 +206,66 @@ running.current = start
 
 
         <MenuDisplay>
+          {
+            buttonCreate(setTheShowMenu,!showMenu ? 'Show Menu' : "Show Controls",'menuButton')
+          }
+
+          {
+            !showMenu ?
+
+            <div id='pannel-topright'>
+            <IconMenu 
+            setDrag={setDrag}
+            setImg = {setImg}
+            />
 
 
-        <div id='pannel-topright'>
-          <IconMenu 
-          setDrag={setDrag}
-          setImg = {setImg}
-          />
-
-
-          {/* map box */}
-          <MapBox
-          resetGrid={resetGrid}
-          setGrid ={setGrid}
-          grid ={grid}
-          reset={resetGrid}
-            
-        />
-
-          <ButtonBox
-            setStart={setStart}
-            sim={sim} 
-            start={start} 
-            startClick={startClick}  
+            {/* map box */}
+            <MapBox
+            resetGrid={resetGrid}
+            setGrid ={setGrid}
+            grid ={grid}
             reset={resetGrid}
-            randomMap={randomMap}
-            singleSim={singleSim}
-            setPreviousGrid={setPreviousGrid}
-            multiSim={multiSim}
-
+              
           />
 
-          {start ?
-          <Timer/>:
-          null
-        }
+            <ButtonBox
+              setStart={setStart}
+              sim={sim} 
+              start={start} 
+              startClick={startClick}  
+              reset={resetGrid}
+              randomMap={randomMap}
+              singleSim={singleSim}
+              setPreviousGrid={setPreviousGrid}
+              multiSim={multiSim}
 
+            />
 
-
-        </div>
-
-
+            {start ?
+            <Timer/>:
+            null
+          }
         <div id ='settings'>
 
-          <Settings
-            setBackground={setBackground}
-            setBlock={setBlock}
-          />
+        <Settings
+          setBackground={setBackground}
+          setBlock={setBlock}
+        />
 
 
         </div> 
 
+
+          </div>
+            :
+            <About />
+
+
+          }
+
+
+        
           </MenuDisplay>
 
         </Display>

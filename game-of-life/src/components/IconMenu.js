@@ -1,14 +1,15 @@
 import React from 'react'
 import dropImg from '../pictures/imgs'
-import {IconBox} from '../styledComponents/style'
+import {IconBox,MenuHeaders,Item} from '../styledComponents/style'
 
 
 export default function iconMenu(props) {
+    
     const createImg=(id,name,value)=>{
         return(
-            <div
+            <Item
             key={id}
-            className={'iconItem'}
+            className="icon"
             id={id}
             onClick={
             e=>{
@@ -20,13 +21,13 @@ export default function iconMenu(props) {
 
             >{name}
 
-            </div>
+            </Item>
         )
 
     }
     return (
         <div>
-            <h3>Icon</h3>
+            <MenuHeaders>Draw Tools</MenuHeaders>
             <IconBox>
             
             {
