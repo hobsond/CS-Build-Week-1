@@ -1,4 +1,4 @@
-import React, { useState, useRef,useCallback,useContext } from 'react'
+import React, { useState, useRef,useCallback,useContext, useEffect } from 'react'
 import './App.css'
 import produce from 'immer'
 
@@ -16,6 +16,7 @@ import {changeValue,setDragItem,setMap,buttonCreate} from './utils/common'
 import {GameCont} from './utils/GameContext'
 import {Display,GameBox,MenuDisplay,Title} from './styledComponents/style'
 
+import maps from './maps/maps'
 
 
 export default function App() {
@@ -213,8 +214,10 @@ const multiSim= (x)=>{
 const running = useRef(start)
 running.current = start
 
-// Three js
+useEffect(()=>{
+  setMap(setGrid,grid,maps.chickenBox,)
   
+},[])
   return (
     <div>
      
@@ -260,6 +263,7 @@ running.current = start
             <MapBox/>
 
             <ButtonBox/>
+            {start ? <Timer/> : null}
 
             
         <div id ='settings'>

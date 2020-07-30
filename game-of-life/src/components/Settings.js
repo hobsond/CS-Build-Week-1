@@ -50,7 +50,7 @@ export default function Settings(props) {
 
     const backgroundColor={
         jade:"#077b8a",
-        home:null,
+        home:'darkgray',
         none:'black'
 
     }
