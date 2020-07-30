@@ -1,7 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import {IconBox,SimBox} from '../styledComponents/style'
 import {buttonCreate} from '../utils/common'
+import {GameCont} from '../utils/GameContext'
+
 export default function ButtonBox(props) {
+
+const {startClick,start,randomMap,singleSim,resetGrid} = useContext(GameCont)
 
     const [simCount,setSimCount] = useState(10)
 
@@ -12,18 +16,18 @@ export default function ButtonBox(props) {
                 
 
                 {
-                    buttonCreate(props.startClick,props.start ? 'Stop':"Start",'startButton',<button/>,{background:props.start? "red" : "#48E330"})
+                    buttonCreate(startClick,start ? 'Stop':"Start",'startButton',<button/>,{background:start? "red" : "#48E330"})
                 }
 
                 {
-                    buttonCreate(props.randomMap,'Random',)
+                    buttonCreate(randomMap,'Random',)
                 }
 
                 {
-                    buttonCreate(props.singleSim,'Next',<button/>)
+                    buttonCreate(singleSim,'Next',<button/>)
                 }
                 {
-                buttonCreate(props.reset,'Reset','reset')
+                buttonCreate(resetGrid,'Reset','reset')
                 }
             </IconBox>
             <SimBox >

@@ -217,33 +217,24 @@ running.current = start
       <h1> Conways Game of Life</h1>
 
         <Display>
-        
-
+          <GameCont.Provider value={
+            {
+              grid,rowsNum,setGrid,addClick,
+              removeClick,background,blockColor,
+              dragItem,drop,img,setImg,setBlock,
+              setDrag,resetGrid,setStart,sim,singleSim,
+              multiSim,startClick,randomMap,setBackground,
+            }
+          }>
         <GameBox id='gameContainer'>
-          {/* div will hold the game,The Main Canvas, And icons */}
-            
-         
-
-            <Canvas 
-            grid={grid} 
-            rows={rowsNum} 
-            setGrid={setGrid} 
-            addClick={addClick} 
-            removeClick={removeClick}
-            background={background}
-            blockColor={blockColor}
-            dragItem={dragItem}
-            drop={drop}
-            img={img}
-            setImg={setImg}
-            setBlock={setBlock}
-
-            />
+              {/* div will hold the game,The Main Canvas, And icons */}
+            <Canvas />
           
         </GameBox>
 
 
-        <MenuDisplay>
+            <MenuDisplay>
+
           {
             buttonCreate(setTheShowMenu,!showMenu ? 'Config' : "Home","menuButton")
           }
@@ -252,10 +243,7 @@ running.current = start
             !showMenu ?
 
             <div id='pannel-topright'>
-            <IconMenu 
-            setDrag={setDrag}
-            setImg = {setImg}
-            />
+            <IconMenu />
 
 
             {/* map box */}
@@ -305,7 +293,9 @@ running.current = start
 
         
           </MenuDisplay>
-
+          
+          </GameCont.Provider>
+          
         </Display>
     </div>
     

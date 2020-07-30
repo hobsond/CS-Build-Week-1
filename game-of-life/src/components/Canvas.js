@@ -1,6 +1,5 @@
 import React,{useContext} from 'react'
 import niceColors from 'nice-color-palettes'
-import produce from 'immer'
 
 import {GameCont} from '../utils/GameContext'
 import {StyledCan} from '../styledComponents/style'
@@ -10,16 +9,17 @@ import {StyledCan} from '../styledComponents/style'
 const colors = new Array(1000).fill().map(() => niceColors[17][Math.floor(Math.random() * 5)])
 
 export default function Canavas(props) {
+  const {rowsNum,grid,img,addClick,removeClick,drop,blockColor,background,setImg} = useContext(GameCont)
   
   return ( 
   <StyledCan>
   <div
     style={{
       display: "grid",
-      gridTemplateColumns:`repeat(${props.rows },20px)`
+      gridTemplateColumns:`repeat(${rowsNum },20px)`
     }}
   >
-    {props.grid.map((rows, i) =>
+    {grid.map((rows, i) =>
       rows.map((col, k) => (
         
         <div
@@ -27,33 +27,37 @@ export default function Canavas(props) {
           key={`${i}-${k}`}
           
           onPointerOver={(e)=>{
-            if(props.img){
-              props.addClick(i,k)
-
+            if(img){
+              addClick(i,k)
             }
           }}
           onPointerLeave={(e)=>{
-            if(props.img){
-              props.removeClick(i,k)
+            if(img){
+              removeClick(i,k)
             }
           }}
 
        
           onClick={()=>{
-            props.img ? 
-            props.drop(i,k):
+            if(img){
+              drop(i,k)
+              
 
-            !props.grid[i][k] ?
-            props.addClick(i,k)
-            :
-            props.removeClick(i,k)
+            }
+            else if(grid[i][k]===0){
+              addClick(i,k)
+            }
+            else{
+            removeClick(i,k)
 
-            props.setImg(false)
+
+            }
+            setImg(false)
           }}
             style={{
             width: '20px',
             height: '20px',
-            backgroundColor: props.grid[i][k] === 1 ? props.blockColor || `${colors[6]}` : props.background,
+            backgroundColor: grid[i][k] === 1 ? blockColor || `${colors[6]}` : background,
             transition:"all .07s ease-in-out",
             border: "solid 1px black"
           }}

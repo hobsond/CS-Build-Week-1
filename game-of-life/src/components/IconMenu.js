@@ -1,10 +1,14 @@
-import React from 'react'
+import React,{useContext} from 'react'
+
 import dropImg from '../pictures/imgs'
 import {IconBox,MenuHeaders,Item} from '../styledComponents/style'
 
+import {GameCont} from '../utils/GameContext'
 
-export default function iconMenu(props) {
-    
+
+export default function IconMenu(props) {
+    const {setDrag,setImg} = useContext(GameCont)
+
     const createImg=(id,name,value)=>{
         return(
             <Item
@@ -14,8 +18,8 @@ export default function iconMenu(props) {
             onClick={
             e=>{
                 e.preventDefault()
-                props.setDrag(value)
-                props.setImg(true)
+                setDrag(value)
+                setImg(true)
             }
             }
 
