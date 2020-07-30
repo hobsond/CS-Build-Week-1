@@ -247,13 +247,7 @@ running.current = start
 
 
             {/* map box */}
-            <MapBox
-            resetGrid={resetGrid}
-            setGrid ={setGrid}
-            grid ={grid}
-            reset={resetGrid}
-              
-          />
+            <MapBox/>
 
             <ButtonBox
               setStart={setStart}

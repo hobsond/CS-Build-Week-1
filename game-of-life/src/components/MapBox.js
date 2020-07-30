@@ -1,11 +1,14 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import maps from '../maps/maps'
 import {setMap} from '../utils/common'
 import {MenuHeaders,IconBox,Item} from '../styledComponents/style'
 
+import {GameCont} from '../utils/GameContext'
 
 
 export default function MapBox(props) {
+    const {setGrid,grid,resetGrid} = useContext(GameCont)
+
 
     const mapItem = (id,map,name)=>{
         return(
@@ -14,8 +17,8 @@ export default function MapBox(props) {
             className='map-item'
             id={id}
             onClick={()=>{
-                props.resetGrid()
-                setMap(props.setGrid,props.grid,map)
+                resetGrid()
+                setMap(setGrid,grid,map)
                 }}
             >
                 {name}
