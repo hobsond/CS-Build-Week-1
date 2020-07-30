@@ -1,6 +1,8 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import niceColors from 'nice-color-palettes'
 import produce from 'immer'
+
+import {GameCont} from '../utils/GameContext'
 import {StyledCan} from '../styledComponents/style'
 
 

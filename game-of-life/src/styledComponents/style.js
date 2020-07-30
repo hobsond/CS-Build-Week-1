@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const Display = styled.div`
   display:flex;
   /* justify-content:center; */
-  padding:2%;
   margin:0 auto;
   height:100%;
   @media(max-width:756px){
@@ -35,10 +34,11 @@ export const MenuDisplay = styled.div`
     background:#6b7b8c;
     height:80vh;
     color:white;
+    height:fit-content;
+
     box-shadow: 0 4px 6px black;
     @media(max-width:756px){
       width:100%;
-      height:fit-content;
       margin:0 auto;
 
   }
