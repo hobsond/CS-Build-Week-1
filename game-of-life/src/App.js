@@ -216,6 +216,7 @@ running.current = start
 
 useEffect(()=>{
   setMap(setGrid,grid,maps.chickenBox,)
+  startClick()
   
 },[])
   return (
