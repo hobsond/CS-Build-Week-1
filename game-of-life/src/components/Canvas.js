@@ -1,6 +1,8 @@
 import React from 'react'
 import niceColors from 'nice-color-palettes'
 import produce from 'immer'
+import {StyledCan} from '../styledComponents/style'
+
 
 
 const colors = new Array(1000).fill().map(() => niceColors[17][Math.floor(Math.random() * 5)])
@@ -8,7 +10,7 @@ const colors = new Array(1000).fill().map(() => niceColors[17][Math.floor(Math.r
 export default function Canavas(props) {
   
   return ( 
-    <>
+  <StyledCan>
   <div
     style={{
       display: "grid",
@@ -58,7 +60,7 @@ export default function Canavas(props) {
     )}
   </div>
 
-</>
+</StyledCan>
 
      
       

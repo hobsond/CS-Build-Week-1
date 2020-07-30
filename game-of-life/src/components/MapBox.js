@@ -1,6 +1,8 @@
 import React from 'react'
 import maps from '../maps/maps'
 import {setMap} from '../utils/common'
+import {IconBox} from '../styledComponents/style'
+
 
 
 export default function MapBox(props) {
@@ -24,17 +26,24 @@ export default function MapBox(props) {
     }
     return (
         <div>
-         
-        {
-            Object.entries(maps).map((k)=>{
-                if(k[0]=='rando'){
-                    console.log(k)
-                }
 
-                
-                return mapItem(k[0],k[1],k[0])
-            })
-        }
+            <h3>Maps</h3>
+
+            <IconBox>
+         
+                {
+                Object.entries(maps).map((k)=>{
+                    if(k[0]=='rando'){
+                        console.log(k)
+                    }
+
+                    
+                    return mapItem(k[0],k[1],k[0])
+                })
+                }
+            </IconBox>
+
         </div>
+        
     )
 }

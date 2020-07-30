@@ -1,12 +1,15 @@
 import React,{useState} from 'react'
-
+import {IconBox} from '../styledComponents/style'
 export default function ButtonBox(props) {
 
     const [simCount,setSimCount] = useState(10)
 
-    const buttonCreate = (cb,inner)=>{
+    const buttonCreate = (cb,inner,id=null,style)=>{
         return(
         <button
+        id={id}
+        style={style}
+        className='button'
         onClick={()=>cb()}
         >
         {inner}
@@ -14,19 +17,22 @@ export default function ButtonBox(props) {
     }
     return (
         <div>
+            <IconBox>
+                
 
-            {
-                buttonCreate(props.startClick,props.start ? 'Stop':"Start")
-            }
+                {
+                    buttonCreate(props.startClick,props.start ? 'Stop':"Start",'startButton',
+                    {background:props.start? "red" : "green"})
+                }
 
-            {
-                buttonCreate(props.randomMap,'Random')
-            }
+                {
+                    buttonCreate(props.randomMap,'Random')
+                }
 
-            {
-                buttonCreate(props.singleSim,'Next')
-            }
-
+                {
+                    buttonCreate(props.singleSim,'Next')
+                }
+            </IconBox>
             
             <label>
                 Select a Simulation

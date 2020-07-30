@@ -1,5 +1,6 @@
 import React from 'react'
 import dropImg from '../pictures/imgs'
+import {IconBox} from '../styledComponents/style'
 
 
 export default function iconMenu(props) {
@@ -25,11 +26,17 @@ export default function iconMenu(props) {
     }
     return (
         <div>
+            <h3>Icon</h3>
+            <IconBox>
+            
             {
                 Object.entries(dropImg).map(x=>{
                     return createImg(x[0],x[0],x[1])
                 })
             }
+        </IconBox>
+
         </div>
+        
     )
 }
